@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SinusoidalWave.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mp1b-anisidvai</a> &gt; <a href="index.source.html" class="el_package">cpen221.soundwaves</a> &gt; <span class="el_source">SinusoidalWave.java</span></div><h1>SinusoidalWave.java</h1><pre class="source lang-java linenums">package cpen221.soundwaves;
+
+
+public class SinusoidalWave extends ConcreteSoundWave {
+
+    /**
+     * A private constructor
+     *
+     * @param channel the time series of amplitude values, is not null
+     */
+    private SinusoidalWave(double[] channel) {
+<span class="nc" id="L12">        super(channel, channel);</span>
+<span class="nc" id="L13">    }</span>
+
+    /**
+     * Obtain a new {@code SinusoidalWave} instance.
+     *
+     * @param freq      the frequency of the wave, &gt; 0
+     * @param phase     the phase of the wave, &gt;= 0
+     * @param amplitude the amplitude of the wave, is in (0, 1]
+     * @param duration  the duration of the wave, &gt;= 0
+     * @return a {@code SinusoidalWave} instance with the specified parameters
+     */
+    public static SinusoidalWave getInstance(double freq, double phase, double amplitude,
+                                             double duration) {
+
+<span class="nc" id="L27">        int numSamples = (int) (duration * 44100);</span>
+<span class="nc" id="L28">        double timeStep = duration / numSamples;</span>
+<span class="nc" id="L29">        double angularFreq = 2.0 * Math.PI * freq;</span>
+
+<span class="nc" id="L31">        double[] channel = new double[numSamples];</span>
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (int i = 0; i &lt; numSamples; i++) {</span>
+<span class="nc" id="L34">            double time = i * timeStep;</span>
+<span class="nc" id="L35">            double amplitudeValue = amplitude * Math.sin(angularFreq * time + phase);</span>
+<span class="nc" id="L36">            channel[i] = amplitudeValue;</span>
+        }
+
+<span class="nc" id="L39">        return new SinusoidalWave(channel);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.9.202303310957</span></div></body></html>
